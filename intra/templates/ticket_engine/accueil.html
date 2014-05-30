@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+      <button type="button" class="btn btn-default btn-lg">
+          <a href="/ticket/create/"><span class="glyphicon glyphicon-pencil"></span> New ticket</a>
+      </button>
+      <br />
+      <br />
+  <div class="panel panel-default">
+  		<!-- Default panel contents -->
+      <div class="panel-heading">Tickets submitted by you</div>
+
+  					<!-- Table -->
+  						<table class="table table-hover">
+  							<thead>
+  								<tr>
+  									<th>#</th>
+  									<th>Priority</th>
+  									<th>Title</th>
+  									<th>Type</th>
+  									<th>Status</th>
+  									<th>Last Update</th>
+                    <th></th>
+  								</tr>
+  							</thead>
+  							<tbody>
+  							{%	for elem in ticket %}
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+  									<td>{% if elem.priority == 0 %}
+  									low
+  									{% elif elem.priority == 1 %}
+  									normal
+  									{% else %}
+  									high
+  									{% endif %}
+  									</td>
+  									<td>{{ elem.title }}</td>
+  									<td>{{ elem.queue }}</td>
+  									<td>{% if elem.status == 0 %}
+                    non-resolu
+                    {% else %}
+                    resolu
+                    {% endif %}
+                    </td>
+  									<td>{{ elem.pub_date }}</td>
+                    <td><a href="/ticket/{{ elem.id }}/" class="btn btn-primary btn-sm">View</a></td>
+  								</tr>
+  							{% endfor %}
+  							</tbody>
+  						</table>
+					</div>
+					{% endblock %}
+

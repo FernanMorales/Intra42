@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Intranational</title>
+    <style>
+        /* --------------------- GENERALS --------------------- */
+
+        * {
+            font-family: 'Roboto', sans-serif;
+            margin: 0px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #424242;
+        }
+
+        p {
+            text-align: center;
+            min-width: 100%;
+        }
+
+
+        /* --------------------- BASE --------------------- */
+
+        #right-content {
+            display: inline-block;
+            width: 80%;
+            margin-left: 20%;
+        }
+
+        #topbar {
+            vertical-align: top;
+            text-align: center;
+            background-color: #ccc;
+            min-width:100%;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        #form-login {
+            display: inline-block;
+            text-align: right;
+            position: absolute;
+            right: 5px;
+            bottom: 5px;
+        }
+
+        #search-bar {
+            display: inline-block;
+            text-align: right;
+            vertical-align: top;
+        }
+
+        #action_drawer {
+            background-color: #999;
+            height: 100%;
+            display: inline-block;
+            width: 20%;
+            vertical-align: top;
+            height: 100%;
+            min-height: 100%;
+            top: 0;
+            bottom: 0;
+            position: absolute;
+        }
+
+        footer {
+            background-color: #ccc;
+            width: 80%;
+            margin-left: 20%;
+        }
+
+
+        /* --------------------- HOME --------------------- */
+
+        #home-page {
+            display: inline-block;
+
+        }
+
+        #activite-title {
+
+        display: inline-block;
+        }
+
+        #corr-title {
+        display: inline-block;
+            text-align: center;
+        }
+
+        #notes-title {
+        display: inline-block;
+            text-align: right;
+        }
+
+
+        /* --------------------- ANNUAIRE --------------------- */
+
+        #all-students {
+            display: block;
+            font-size: 14px;
+        }
+
+        .student {
+            display: inline-block;
+            text-align: center;
+            vertical-align: top;
+            width: 120px;
+        }
+
+        a.student:hover {
+            border-width: 1px;
+            border-style: solid;
+            margin: -1px;
+        }
+
+        .photo {
+            width: 100px;
+        }
+
+        /* --------------------- PROFIL --------------------- */
+
+        .infos {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+
+        /* --------------------- PLANNING --------------------- */
+
+        .titles {
+            display: flex;
+        }
+
+
+        /* --------------------- PLANNING --------------------- */
+
+        .title-el {
+            border-style:solid;
+            border-color:red;
+            color: blue;
+            font-size: 24px;
+        }
+
+        .acti-el {
+            border-style:solid;
+            border-color:red;
+        }
+
+
+        /* --------------------- ADMIN --------------------- */
+
+        .create {
+            text-align: right;
+            color: blue;
+            margin:auto;
+        }
+
+        .rud {
+            text-align: center;
+        }
+
+        .bloctop {
+            color: pink;
+            font-size: 22px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="action_drawer">
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/annuaire/">Annuaire</a></li>
+            <li><a href="/forum/">Forum</a></li>
+            <li><a href="/ticket/">Tickets</a></li>
+            <li><a href="/planning/">Planning</a></li>
+            <li><a href="/elearning/">E-Learning</a></li>
+            {% if request.user.is_superuser or user_is_logged_in.is_superuser %}
+                <li><a href="/admin/">Admin</a></li>
+            {% endif %}
+        </ul>
+        </div>
+        <div id="right-content">
+        <div id="topbar">
+            {% if request.user.is_authenticated or request.session.login or user_is_logged_in %}
+                <p>Welcome {% if request.user.first_name %}
+                                    {{ request.user.first_name }}
+                                    {{ request.user.last_name.upper }}
+                           {% elif user_is_logged_in and user_is_logged_in.0.0 %}
+                                    {{ user_is_logged_in.login }}
+                                    {{ user_is_logged_in.last_name.upper }}
+                                    {{ user_is_logged_in.0.2 }}
+                                    {{ user_is_logged_in.0.1 }}
+                           {% endif %}</p>
+            <a id="logout" href="/logout/">Logout</a>
+                <div id="form-login">
+                    <form id="search-bar">
+                        <input type="text">
+                        <input type="submit" value="search">
+                    </form>
+                </div>
+            {% else %}
+                <a href="/login/">connexion</a>
+            {% endif %}
+        </div>
+    <div id="content" class="wrapper">
+        {% block content %}
+        {% endblock %}
+    </div>
+    </div>
+<footer>
+    <p>Intra - tcollart</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for elem in modules %}
+        <div class="box-el">
+            <div class="title-el">
+                [{{ elem.0 }}]
+            </div>
+            <ul class="acti-el">
+            {% for acti in activites %}
+                {% if acti.1 == elem.1 %}
+                   <li>{{ acti.0 }}</li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+            </div>
+    {% endfor %}
+
+    <hr>
+
+{% endblock %}

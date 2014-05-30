@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div id="profil">
+        {% for entry in field %}
+        <div class="bloctop">{{ entry.1 }} {{ entry.2.upper }}</div>
+        <hr>
+        <div class="blocmain">
+            <img class="picture" src="data:image/png;base64,{{ entry.3 }}"/>
+            <div class="infos">
+                Login: {{ entry.0 }}
+            </div>
+            <hr>
+            <div class="editable infos"></div>
+        </div>
+        <div class="bloc tabulation">
+            <div>- nombre de crédits acquis / possibles</div>
+            <div>- liste des modules / activités en cours, ceux qui sont passés et ceux qui vont débuter</div>
+            <div>- liste des personnes liées aux activités et corrections</div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

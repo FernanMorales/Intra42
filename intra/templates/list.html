@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div id="list">
+      {% for forum in forums %}
+      <a href="/forum/{{ forum.title }}" class="list">
+        <div class="title">
+          {{ forum.title }}
+        </div>
+      </a>
+      {% endfor %}
+  </div>
+{% endblock %}

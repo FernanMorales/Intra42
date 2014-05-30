@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="list">
+    <a class="create" href="/forum/create/{{ c }}/{{ sc }}/">Create a new thread</a>
+    {% for thread in threads %}
+      <div class="thread">
+        <a class="link" href="/forum/{{ c }}/{{ sc }}/{{ thread.title }}">{{ thread.title }}</a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
