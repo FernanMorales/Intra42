@@ -1,26 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="list">
-    <h4>{{ t }}</h4>
-    {% for post in posts %}
-      <div class="post">
-        <p>{{ post.body }}</p>
-        <p>Written by {{ post.creator }} on {{ post.created }}</p>
-        {% for comment in comments %}
-          {% if comment.post == post %}
-            <p>{{ comment.body }}</p>
-            <p>Comment by {{ comment.creator }} on {{ comment.created }}</p>
-          {% endif %}
-        {% endfor %}
-      </div>
-    {% endfor %}
-    <div class="reply">
-      <form method="post" action="/forum/reply/{{ c }}/{{ sc }}/{{ t }}/">
-        {% csrf_token %}
-        <textarea rows="6" name="body" cols="80" placeholder="Your reply here"></textarea>
-        <input type="submit" value="Reply"></input>
-      </form>
-    </div>
+<div class="list">
+  <h4>{{ t }}</h4>
+  {% for post in posts %}
+  <div class="post">
+    <p>{{ post.body }}</p>
+    <p>Written by {{ post.creator.login }} on {{ post.created }}</p>
   </div>
+  {% endfor %}
+  <div class="reply">
+    <form method="post" action="/forum/reply/{{ c }}/{{ sc }}/{{ t }}/">
+      {% csrf_token %}
+      <textarea rows="6" name="body" cols="80" placeholder="Your reply here"></textarea>
+      <input type="submit" value="Reply"></input>
+    </form>
+  </div>
+</div>
 {% endblock %}

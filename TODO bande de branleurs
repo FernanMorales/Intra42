@@ -1,0 +1,31 @@
+--------------
+
+1. Bases
+    - Forum: Couscous
+    - Connexion LDAP: fait
+    - Annuaire: fait
+    - Panel Admin: on garde donc celui de base
+    - Systeme de tickets: Morales
+
+2. Modules / Activites / Baremes:
+    - Plus ou moins fait
+
+3. Notes / Corrections:
+    - Faire la correlation entre plein de trucs hyper chiants
+
+4. Profils:
+    - nom / prénom: fait
+    - photo: fait
+    - nombre de crédits acquis / possibles
+    - liste des modules / activités en cours, ceux qui sont passés et ceux qui vont débuter
+    - liste des personnes liées aux activités et corrections
+
+5. Planning:
+    - Faire un calendrier qui recuper les dates des activites
+
+6. E-Learning:
+    - Creation de categories en fct des activites
+
+7.  Autologin:
+    - A faire
+    http://stackoverflow.com/questions/2235561/can-i-create-automatic-login-to-django-using-secret-in-url

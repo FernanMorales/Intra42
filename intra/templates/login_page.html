@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <form method="post" action="/login/">{% csrf_token %}
-    <input type="text" name="login_user" maxlength="20" placeholder="Your login">
-    <input type="password" name="password" maxlength="35" placeholder="Your password">
-    <input type="Submit" value="Sign in">
-  </form>
+<form method="post" action="/login/">{% csrf_token %}
+	<input type="text" name="login_user" maxlength="20" placeholder="Your login">
+	<input type="password" name="password" maxlength="35" placeholder="Your password">
+	<input type="Submit" value="Sign in">
+</form>
 {% endblock %}

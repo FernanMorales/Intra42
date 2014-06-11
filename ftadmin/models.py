@@ -16,6 +16,7 @@ class Module(models.Model):
 class Activite(models.Model):
     name = models.CharField(max_length=32)
     description = models.TextField(max_length=500)
+    file  = models.FileField(upload_to='files/')
     sujet = models.CharField(max_length=8)
     nb_place = models.IntegerField()
     date_insc_debut = models.DateField()
@@ -41,7 +42,7 @@ class Activite(models.Model):
         return self.name
 
 class Bareme(models.Model):
-    activite_associee = models.CharField(max_length=64)
+    activite_associee = models.ForeignKey(Module)
 
     def __unicode__(self):
         return self.activite_associee

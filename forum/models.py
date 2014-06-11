@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from annuaire.models import Student
 
 
 class Category(models.Model):
@@ -20,7 +20,7 @@ class SubCategory(models.Model):
 class Thread(models.Model):
     sc_id = models.ForeignKey(SubCategory)
     title = models.CharField(max_length=60)
-    creator = models.ForeignKey(User)
+    creator = models.ForeignKey(Student)
 
     def __unicode__(self):
         return unicode(self.creator) + " - " + self.title
@@ -33,7 +33,7 @@ class Thread(models.Model):
 
 
 class Post(models.Model):
-    creator = models.ForeignKey(User)
+    creator = models.ForeignKey(Student)
     created = models.DateTimeField(auto_now_add=True)
     thread = models.ForeignKey(Thread)
     body = models.TextField(max_length=100000)
@@ -43,7 +43,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    creator = models.ForeignKey(User)
+    creator = models.ForeignKey(Student)
     created = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey(Post)
     body = models.TextField(max_length=10000)

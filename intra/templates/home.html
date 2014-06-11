@@ -1,40 +1,38 @@
 {% extends 'base.html' %}
-
+{% load utils %}
 {% block content %}
-        <div id="home-page">
-    <h3 id="activite-title">Activite</h3>
-    {% for elem in activites %}
+<div id="home-page">
+    <div id="activite-block">
+        <h3 id="activite-title">Activite</h3>
+        {% for elem in activites %}
+        {% if elem.3|outdated %}
         <div class="activite-encours">
-            Le projet [{{ elem.0 }}] est en cours
+            Le projet <b>{{ elem.1 }}</b> est en cours
             <div>Vous devez vous <a href="">inscrire</a></div>
-            <div><a href="">Lisez le sujet</a>, faites votre rendu avant <b>DATE</b></div>
+            <div><a href="">Lisez le sujet</a>, faites votre rendu avant le <b>{{ elem.3 }}, 23h42</b></div>
         </div>
-    {% endfor %}
-    <h3 id="corr-title">Corrections en cours</h3>
-    {% for elem in activites %}
-        <div class="corr-encours">
-            Le projet [{{ elem.0 }}] est en cours
-            <div>Vous devez vous <a href="">inscrire</a></div>
-            <div><a href="">Lisez le sujet</a>, faites votre rendu avant <b>DATE</b></div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div id="corr-block">
+        <h3 id="corr-title">Corrections en cours</h3>
+        {% for elem in activites %}
+        {% if elem.3|outdated == False %}
+        <div class="activite-encours">
+            Vous devez vous faire corriger <b>{{ elem.1 }}</b>
         </div>
-    {% endfor %}
-    <h3 id="notes-title">Dernieres notes recues</h3>
-    {% for elem in activites %}
-        <div class="notes-encours">
-            Le projet [{{ elem.0 }}] est en cours
-            <div>Vous devez vous <a href="">inscrire</a></div>
-            <div><a href="">Lisez le sujet</a>, faites votre rendu avant <b>DATE</b></div>
-        </div>
-    {% endfor %}
-            <hr>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <div id="notes-block">
+        <h3 id="notes-title">Dernieres notes recues</h3>
+    </div>
+    <hr>
+
     <h3 id="news-title">News feed</h3>
-    {% for elem in activites %}
-        <div class="news-encours">
-            Le projet [{{ elem.0 }}] est en cours
-            <div>Vous devez vous <a href="">inscrire</a></div>
-            <div><a href="">Lisez le sujet</a>, faites votre rendu avant <b>DATE</b></div>
-        </div>
-    {% endfor %}
-            </div>
+    <center><iframe width="420" height="345" src="http://www.youtube.com/embed/6FEDrU85FLE"></iframe></center>
+
+</div>
 <hr>
 {% endblock %}

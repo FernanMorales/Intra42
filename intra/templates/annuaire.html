@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
+{% load utils %}
+{% load cache %}
 
 {% block content %}
-        <div id="all-students">
-{% for user in user_list %}
-    <a href="/user/{{ user.0 }}" class="student">
-        <img class="photo" src="data:image/png;base64,{{ user.3 }}"/>
-        <div class="login">{{ user.0 }}</div>
-        <div class="name">{{ user.1 }} {{ user.2.upper }}</div>
-    </a>
-{% endfor %}
-            </div>
+<div id="all-students">
+    {% cache 30000 user user_list %}
+        {% for user in user_list %}
+        <a href="/user/{{ user.0 }}" class="student">
+            <img class="photo" src="data:image/png;base64,{{ user.0|get_picture }}"/>
+            <div class="login">{{ user.0 }}</div>
+            <div class="name">{{ user.1 }} {{ user.2.upper }}</div>
+        </a>
+        {% endfor %}
+    {% endcache %}
+</div>
 {% endblock %}

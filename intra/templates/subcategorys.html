@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="list">
-    {% for c in sc %}
-      <a href="/forum/{{ c_name }}/{{ c.title }}">{{ c.title }}</p>
-    {% endfor %}
-  </div>
+<div class="list">
+	{% for c in sc %}
+	<a href="/forum/{{ c_name }}/{{ c.title }}">{{ c.title }}</a>
+	{% endfor %}
+</div>
 {% endblock %}

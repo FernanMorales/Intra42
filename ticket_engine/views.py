@@ -1,29 +1,30 @@
-from django.shortcuts import render, render_to_response
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, render_to_response, redirect
+from django.http import HttpResponseRedirect
 from ticket_engine.models import Ticket
-from django.core.context_processors import csrf
 from django.template import RequestContext
-from django.contrib.auth.models import User
-from django.contrib.auth import logout, authenticate, login
-from django.contrib.sessions.backends.db import SessionStore
-from django import forms
 from ticket_engine.forms import TicketForm
-from django.utils import timezone
 from intra.views import get_ctx
-from annuaire.models import Student
 
 # Create your views here.
 
 def accueil(request):
     user_ctx = get_ctx(request)
+    try:
+        print len(user_ctx)
+    except TypeError:
+        return redirect('/login/')
     ctx = {'user_is_logged_in': user_ctx}
     user = ctx['user_is_logged_in'][0][2]
     tick = Ticket.objects.filter(user=user)
-    return render(request, 'ticket_engine/accueil.html', { 'ticket': tick })
+    return render(request, 'ticket_engine/accueil.html', { 'ticket': tick, 'user_is_logged_in' : user_ctx })
 
 
 def create_ticket(request):
     user_ctx = get_ctx(request)
+    try:
+        print len(user_ctx)
+    except TypeError:
+        return redirect('/login/')
     ctx = {'user_is_logged_in': user_ctx}
     if request.method == 'POST':
         form = TicketForm(request.POST)

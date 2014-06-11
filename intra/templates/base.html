@@ -77,21 +77,46 @@
 
         #home-page {
             display: inline-block;
+            width: 100%;
+        }
+
+        #home-page a {
+            color: #98bf21;
+        }
+
+
+        #activite-block{
+            display: inline-block;
+            width: 33%;
+        }
+
+        .activite-encours {
+            margin: 5px;
+            background-color: #E9E9E9;
+            border-style:solid;
+            border-color:#98bf21;
 
         }
 
-        #activite-title {
-
-        display: inline-block;
+        #corr-block{
+            vertical-align: top;
+            display: inline-block;
+            width: 33%;
         }
 
         #corr-title {
-        display: inline-block;
+            display: inline-block;
             text-align: center;
         }
 
+        #notes-block{
+            vertical-align: top;
+            display: inline-block;
+            width: 33%;
+        }
+
         #notes-title {
-        display: inline-block;
+            display: inline-block;
             text-align: right;
         }
 
@@ -180,40 +205,38 @@
             <li><a href="/planning/">Planning</a></li>
             <li><a href="/elearning/">E-Learning</a></li>
             {% if request.user.is_superuser or user_is_logged_in.is_superuser %}
-                <li><a href="/admin/">Admin</a></li>
+            <li><a href="/admin/">Admin</a></li>
             {% endif %}
         </ul>
-        </div>
-        <div id="right-content">
+    </div>
+    <div id="right-content">
         <div id="topbar">
-            {% if request.user.is_authenticated or request.session.login or user_is_logged_in %}
-                <p>Welcome {% if request.user.first_name %}
-                                    {{ request.user.first_name }}
-                                    {{ request.user.last_name.upper }}
-                           {% elif user_is_logged_in and user_is_logged_in.0.0 %}
-                                    {{ user_is_logged_in.login }}
-                                    {{ user_is_logged_in.last_name.upper }}
-                                    {{ user_is_logged_in.0.2 }}
-                                    {{ user_is_logged_in.0.1 }}
-                           {% endif %}</p>
-            <a id="logout" href="/logout/">Logout</a>
+            {% if request.user.is_authenticated or user_is_logged_in and user_is_logged_in|length < 9 %}
+            <p>Welcome {% if request.user.first_name %}
+                {{ request.user.first_name }}
+                {{ request.user.last_name.upper }}
+                {% elif user_is_logged_in and user_is_logged_in.0.0 and user_is_logged_in.0.1 %}
+                {{ user_is_logged_in.0.0 }}
+                {{ user_is_logged_in.0.1 }}
+                {% endif %}</p>
+                <a id="logout" href="/logout/">Logout</a>
                 <div id="form-login">
                     <form id="search-bar">
                         <input type="text">
                         <input type="submit" value="search">
                     </form>
                 </div>
-            {% else %}
+                {% else %}
                 <a href="/login/">connexion</a>
-            {% endif %}
+                {% endif %}
+            </div>
+            <div id="content" class="wrapper">
+                {% block content %}
+                {% endblock %}
+            </div>
         </div>
-    <div id="content" class="wrapper">
-        {% block content %}
-        {% endblock %}
-    </div>
-    </div>
-<footer>
-    <p>Intra - tcollart</p>
-</footer>
-</body>
-</html>
+        <footer>
+            <p>Intra - tcollart</p>
+        </footer>
+    </body>
+    </html>
